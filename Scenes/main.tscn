@@ -1,0 +1,171 @@
+[gd_scene load_steps=6 format=3 uid="uid://c8prx85qai7s4"]
+
+[ext_resource type="Script" path="res://Scripts/main.gd" id="1_ndy6f"]
+[ext_resource type="Texture2D" uid="uid://c76vas4o07bmc" path="res://Images/play_button.svg" id="1_r28ju"]
+[ext_resource type="Texture2D" uid="uid://cqvmnfbf8q4nd" path="res://Images/pause_button.svg" id="2_qm2y0"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_le5ky"]
+font_size = 24
+
+[sub_resource type="LabelSettings" id="LabelSettings_53he5"]
+
+[node name="Control" type="Control" node_paths=PackedStringArray("start_stop_button", "last_earnings_label", "last_time_label", "total_earned_label", "total_time_label", "hourly_wage_input")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_ndy6f")
+start_stop_button = NodePath("Start Stop Button")
+play_texture = ExtResource("1_r28ju")
+pause_texture = ExtResource("2_qm2y0")
+last_earnings_label = NodePath("Last Earnings")
+last_time_label = NodePath("Last Time")
+total_earned_label = NodePath("Total Earnings")
+total_time_label = NodePath("Total Time")
+hourly_wage_input = NodePath("Hourly Wage")
+
+[node name="Background" type="Panel" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Start Stop Button" type="TextureButton" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -80.0
+offset_top = -80.0
+offset_right = 80.0
+offset_bottom = 80.0
+grow_horizontal = 2
+grow_vertical = 2
+texture_normal = ExtResource("1_r28ju")
+
+[node name="Last Earnings" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -100.0
+offset_top = 96.0
+offset_right = 100.0
+offset_bottom = 146.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "$0.00"
+label_settings = SubResource("LabelSettings_le5ky")
+horizontal_alignment = 1
+
+[node name="Total Earnings" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -200.0
+offset_top = -50.0
+grow_horizontal = 2
+grow_vertical = 0
+text = "$0.00 total"
+label_settings = SubResource("LabelSettings_le5ky")
+horizontal_alignment = 1
+
+[node name="Total Time" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_top = -50.0
+offset_right = 200.0
+grow_horizontal = 2
+grow_vertical = 0
+text = "00:00:00.00
+"
+label_settings = SubResource("LabelSettings_le5ky")
+horizontal_alignment = 1
+
+[node name="Last Time" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 105.0
+offset_top = -25.0
+offset_right = 305.0
+offset_bottom = 25.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "00:00:00.00"
+label_settings = SubResource("LabelSettings_le5ky")
+vertical_alignment = 1
+
+[node name="Hourly Label" type="Label" parent="."]
+layout_mode = 1
+offset_left = 125.0
+offset_top = 15.0
+offset_right = 225.0
+offset_bottom = 45.0
+text = "hourly wage"
+label_settings = SubResource("LabelSettings_53he5")
+vertical_alignment = 1
+
+[node name="Hourly Wage" type="SpinBox" parent="."]
+layout_mode = 0
+offset_left = 15.0
+offset_top = 15.0
+offset_right = 115.0
+offset_bottom = 50.0
+step = 0.01
+allow_greater = true
+update_on_text_changed = true
+prefix = "$"
+
+[node name="Reset Button" type="Button" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -200.0
+offset_top = -15.0
+offset_right = -100.0
+offset_bottom = 15.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Reset"
+
+[node name="Clear Button" type="Button" parent="."]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = 185.0
+offset_top = -48.0
+offset_right = 285.0
+offset_bottom = -17.0
+grow_horizontal = 2
+grow_vertical = 0
+text = "Clear"
+
+[connection signal="pressed" from="Start Stop Button" to="." method="_on_start_stop_button_pressed"]
+[connection signal="value_changed" from="Hourly Wage" to="." method="_on_hourly_wage_value_changed"]
+[connection signal="pressed" from="Reset Button" to="." method="_on_reset_button_pressed"]
+[connection signal="pressed" from="Clear Button" to="." method="_on_clear_button_pressed"]
